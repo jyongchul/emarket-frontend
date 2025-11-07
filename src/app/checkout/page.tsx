@@ -293,6 +293,35 @@ export default function CheckoutPage() {
                     </div>
                   </label>
 
+                  {/* Bank Account Information - Show when bank transfer is selected */}
+                  {formData.paymentMethod === 'bank_transfer' && (
+                    <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 space-y-3">
+                      <div className="flex items-start">
+                        <span className="text-2xl mr-3">🏦</span>
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-gray-900 mb-4 text-lg">계좌 정보 / Bank Account Information</h3>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex">
+                              <span className="font-medium text-gray-700 w-32">은행 / Bank:</span>
+                              <span className="text-gray-900 font-semibold">국민은행 (Kookmin Bank)</span>
+                            </div>
+                            <div className="flex">
+                              <span className="font-medium text-gray-700 w-32">계좌번호 / Account:</span>
+                              <span className="text-gray-900 font-semibold text-lg">805901-04-314273</span>
+                            </div>
+                            <div className="flex">
+                              <span className="font-medium text-gray-700 w-32">예금주 / Name:</span>
+                              <span className="text-gray-900 font-semibold">(주)하얀모자마케팅</span>
+                            </div>
+                          </div>
+                          <p className="mt-4 text-xs text-gray-600 bg-white p-3 rounded border border-blue-200">
+                            💡 Please transfer the total amount to the account above and your order will be processed after payment confirmation.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <label className="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-gray-900 transition">
                     <input
                       type="radio"
