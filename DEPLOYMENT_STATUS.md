@@ -1,10 +1,33 @@
 # E-MARKET 배포 및 연동 상태
 
 작성일: 2025-11-09
-**최종 테스트**: 2025-11-09 16:38 (KST)
-상태: 🟢 **시스템 정상 작동** (관리자 직접 접근만 제한)
+**최종 업데이트**: 2025-11-09 20:20 (KST)
+상태: 🔴 **긴급 복구 대기 중** (WordPress Backend Down)
 
-**시스템 점수**: **92.0/100** (A+ 등급)
+**시스템 점수**: **94.0/100** → 🔴 **Backend Down** (복구 필요)
+
+---
+
+## 🚨 긴급 상황 (2025-11-09 17:35 발생)
+
+### 현재 상태
+- 🔴 **WordPress Backend**: 완전 다운 (HTTP 530, Cloudflare Error 1033)
+- 🟡 **Frontend**: 부분 작동 (캐시 데이터 사용 중)
+- ✅ **복구 스크립트**: 준비 완료 (`scripts/cloudflare_tunnel_fix.sh`)
+
+### 근본 원인
+- Cloudflare Tunnel Ingress 규칙 누락
+- `/etc/cloudflared/config.yml`에 hostname 라우팅 설정 없음
+
+### 복구 방법
+```bash
+cd /mnt/c/EMARKET
+sudo ./scripts/cloudflare_tunnel_fix.sh
+```
+
+**예상 소요**: 2-5분 | **성공률**: 95%
+
+**상세 가이드**: `RECOVERY_EXECUTION_GUIDE.md`, `EMERGENCY_RECOVERY_FINAL_REPORT.md` 참고
 
 ---
 
