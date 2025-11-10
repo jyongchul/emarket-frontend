@@ -18,9 +18,11 @@ SMS_API_KEY = "YOUR_API_KEY_HERE"  # API 키
 SMS_USER_ID = "YOUR_USER_ID_HERE"  # 알리고 아이디
 SMS_SENDER = "010-9333-2028"  # 발신번호 (사전 등록 필요)
 
-# 수신자 정보
-CLIENT_NAME = "최지호"
-CLIENT_PHONE = "010-XXXX-XXXX"  # 실제 번호로 변경 필요
+# 수신자 정보 (B2B 파트너)
+CLIENT_NAME = "임수진"
+CLIENT_TITLE = "과장님"
+CLIENT_PHONE = "010-3487-3457"  # 주 연락처
+CLIENT_PHONE_2 = "010-3291-4811"  # 보조 연락처
 
 # 프로젝트 정보
 PROJECT_NAME = "E-MARKET"
@@ -35,7 +37,7 @@ def send_sms():
     # 주의: "?" 이모티콘/bullet point 대신 사용 금지
     message = f"""[{PROJECT_NAME}] {today} 진행 보고
 
-안녕하세요, {CLIENT_NAME} 대표님.
+안녕하세요, {CLIENT_NAME} {CLIENT_TITLE}
 하얀모자마케팅 이종철입니다.
 
 현재 진행 상황:

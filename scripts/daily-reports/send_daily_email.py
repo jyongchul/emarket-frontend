@@ -20,11 +20,16 @@ from pathlib import Path
 EMAIL_USER = "jyongchul@gmail.com"
 EMAIL_APP_PASSWORD = "yhue jeul amhv uwno"  # 또는 "jojy grev vhxj bvvz"
 
-# 수신자 정보
-CLIENT_NAME = "최지호"
-CLIENT_COMPANY = "주식회사 이마켓 (E-MARKET)"
-CLIENT_EMAIL = "jhosi@naver.com"  # 계약서상의 이메일 (확인 필요)
+# 수신자 정보 (B2B 파트너)
+CLIENT_NAME = "임수진"
+CLIENT_TITLE = "과장님"  # 고객 앞에서 '과장'으로 응대
+CLIENT_COMPANY = "디토 (DITO)"
+CLIENT_EMAIL = "sjlim0114@daum.net"
 CC_EMAIL = "jyongchul@naver.com"
+
+# 최종 고객 정보 (참고용 - 직접 연락 금지!)
+END_CLIENT_NAME = "최지호"
+END_CLIENT_COMPANY = "주식회사 이마켓"
 
 # 프로젝트 정보
 PROJECT_NAME = "외국인 바이어 대상 중고거래 중개 배송 플랫폼"
@@ -112,7 +117,7 @@ def create_html_email():
                                     발송일: {today}
                                 </p>
                                 <p style="font-size: 16px; color: #2c3e50; line-height: 1.8; margin: 0;">
-                                    안녕하세요, <strong>{CLIENT_NAME}</strong> 대표님.<br>
+                                    안녕하세요, <strong>{CLIENT_NAME} {CLIENT_TITLE}</strong><br>
                                     <strong>(주)하얀모자마케팅 이종철</strong>입니다.
                                 </p>
                                 <p style="font-size: 16px; color: #2c3e50; line-height: 1.8; margin: 20px 0 0 0;">
