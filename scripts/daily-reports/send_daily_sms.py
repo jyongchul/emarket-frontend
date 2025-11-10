@@ -11,12 +11,11 @@ E-MARKET 프로젝트 일일 진행 보고 SMS 발송 스크립트
 import requests
 from datetime import datetime
 
-# SMS API 설정 (예시: 알리고 API)
-# 실제 사용 시 API 키를 발급받아 설정 필요
-SMS_API_URL = "https://apis.aligo.in/send/"  # 알리고 API 엔드포인트
-SMS_API_KEY = "YOUR_API_KEY_HERE"  # API 키
-SMS_USER_ID = "YOUR_USER_ID_HERE"  # 알리고 아이디
-SMS_SENDER = "010-9333-2028"  # 발신번호 (사전 등록 필요)
+# SMS API 설정 (알리고 API)
+SMS_API_URL = "https://apis.aligo.in/send/"
+SMS_API_KEY = "ef5c198fjdlguiw8ee8gzxjlle704m2o"
+SMS_USER_ID = "jyongchul"
+SMS_SENDER = "010-9333-2028"
 
 # 수신자 정보 (B2B 파트너)
 CLIENT_NAME = "임수진"
@@ -67,32 +66,20 @@ def send_sms():
             'title': f'[{PROJECT_NAME}] 진행 보고'
         }
 
-        # API가 설정되지 않은 경우 메시지만 출력
-        if SMS_API_KEY == "YOUR_API_KEY_HERE":
-            print("⚠️  SMS API 설정이 필요합니다.")
-            print("=" * 60)
-            print("발송될 메시지:")
-            print("=" * 60)
-            print(message)
-            print("=" * 60)
-            print("\n📱 SMS API 설정 방법:")
-            print("1. 알리고(https://smartsms.aligo.in/) 또는 CoolSMS 가입")
-            print("2. API 키 발급")
-            print("3. send_daily_sms.py에서 API 키, 사용자 ID, 발신번호 설정")
-            print("4. 발신번호 사전 등록 필요 (통신사 규정)")
-            return False
-
         # 실제 SMS 발송
         response = requests.post(SMS_API_URL, data=data)
 
         if response.status_code == 200:
             result = response.json()
-            if result.get('result_code') == '1':
+            if int(result.get('result_code', 0)) > 0:
                 print(f"✅ SMS 발송 성공: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
                 print(f"   수신자: {CLIENT_PHONE}")
+                print(f"   메시지 ID: {result.get('msg_id')}")
+                print(f"   성공: {result.get('success_cnt')}건, 실패: {result.get('error_cnt')}건")
                 return True
             else:
                 print(f"❌ SMS 발송 실패: {result.get('message')}")
+                print(f"   오류 코드: {result.get('result_code')}")
                 return False
         else:
             print(f"❌ SMS API 호출 실패: HTTP {response.status_code}")
