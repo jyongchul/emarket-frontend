@@ -20,8 +20,9 @@ SMS_SENDER = "010-9333-2028"
 # 수신자 정보 (B2B 파트너)
 CLIENT_NAME = "임수진"
 CLIENT_TITLE = "과장님"
-CLIENT_PHONE = "010-3487-3457"  # 주 연락처
-CLIENT_PHONE_2 = "010-3291-4811"  # 보조 연락처
+CLIENT_PHONE = "010-3291-4811"  # 주 연락처 (도달 가능)
+CLIENT_PHONE_2 = "010-3487-3457"  # 보조 연락처 (도달 불가)
+CLIENT_PHONES_ALL = "010-3291-4811,010-3487-3457"  # 두 번호 모두 발송
 
 # 프로젝트 정보
 PROJECT_NAME = "E-MARKET"
@@ -55,12 +56,12 @@ def send_sms():
 감사합니다."""
 
     try:
-        # 알리고 API 사용 예시
+        # 알리고 API 사용 (두 번호 모두 발송)
         data = {
             'key': SMS_API_KEY,
             'user_id': SMS_USER_ID,
             'sender': SMS_SENDER,
-            'receiver': CLIENT_PHONE,
+            'receiver': CLIENT_PHONES_ALL,  # 콤마로 구분하여 여러 번호 발송
             'msg': message,
             'msg_type': 'LMS',  # 장문 문자 (Long Message Service)
             'title': f'[{PROJECT_NAME}] 진행 보고'
@@ -73,7 +74,7 @@ def send_sms():
             result = response.json()
             if int(result.get('result_code', 0)) > 0:
                 print(f"✅ SMS 발송 성공: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-                print(f"   수신자: {CLIENT_PHONE}")
+                print(f"   수신자: {CLIENT_PHONES_ALL.replace(',', ', ')}")
                 print(f"   메시지 ID: {result.get('msg_id')}")
                 print(f"   성공: {result.get('success_cnt')}건, 실패: {result.get('error_cnt')}건")
                 return True
